@@ -37,10 +37,12 @@ export const authOptions: AuthOptions = {
           },
         });
 
+        // check if user input a password
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
         }
 
+        // comparing encrypted password using bcrypt
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword

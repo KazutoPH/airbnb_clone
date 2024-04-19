@@ -97,7 +97,9 @@ const LogInModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => {
+          signIn("google");
+        }}
       />
 
       {/* sign-in via github */}
@@ -112,7 +114,7 @@ const LogInModal = () => {
 
       <div className="flex flex-row items-center gap-2 justify-center">
         <p className="text-neutral-500 text-center ml-4 font-light">
-          Don't have an account?
+          First time in Airbnb?
         </p>
         <p
           className=" text-rose-500 text-center cursor-pointer font-semibold hover:underline"
@@ -121,7 +123,7 @@ const LogInModal = () => {
             registerModal.onOpen();
           }}
         >
-          Register
+          Create an account
         </p>
       </div>
     </div>

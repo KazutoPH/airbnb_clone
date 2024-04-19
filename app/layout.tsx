@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LogInModal from "@/components/modals/LogInModal";
 import getCurrentUser from "./libs/actions/getCurrentUser.action";
+import RentModal from "@/components/modals/RentModal";
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ToastContainer pauseOnHover={false} autoClose={2500} />
+        <RentModal />
         <LogInModal />
         <RegisterModal />
         <Navbar currentUser={currentUser} />
