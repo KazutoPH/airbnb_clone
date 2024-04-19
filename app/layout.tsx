@@ -7,7 +7,7 @@ import RegisterModal from "@/components/modals/RegisterModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LogInModal from "@/components/modals/LogInModal";
-import getCurrentUser from "./libs/actions/getCurrent.action";
+import getCurrentUser from "./libs/actions/getCurrentUser.action";
 const font = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +21,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const currentUser = await getCurrentUser();
-  console.log(currentUser);
   return (
     <html lang="en">
       <body className={font.className}>

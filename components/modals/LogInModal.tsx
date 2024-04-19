@@ -11,7 +11,6 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import CustomButton from "../CustomButton";
 import useLogInModal from "@/app/hooks/useLogInModal";
 import { useRouter } from "next/navigation";
@@ -68,7 +67,7 @@ const LogInModal = () => {
       <Heading center title="Welcome Back" subtitle="Log in to your account" />
 
       <Input
-        id="log_in_email"
+        id="email"
         label="Email"
         disabled={isLoading}
         register={register}
@@ -77,7 +76,7 @@ const LogInModal = () => {
       />
 
       <Input
-        id="log_in_password"
+        id="password"
         label="Password"
         type="password"
         disabled={isLoading}
@@ -106,18 +105,23 @@ const LogInModal = () => {
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => {
+          signIn("github");
+        }}
       />
 
       <div className="flex flex-row items-center gap-2 justify-center">
         <p className="text-neutral-500 text-center ml-4 font-light">
-          Already have an account
+          Don't have an account?
         </p>
         <p
           className=" text-rose-500 text-center cursor-pointer font-semibold hover:underline"
-          onClick={registerModal.onClose}
+          onClick={() => {
+            LogInModal.onClose();
+            registerModal.onOpen();
+          }}
         >
-          Log in
+          Register
         </p>
       </div>
     </div>

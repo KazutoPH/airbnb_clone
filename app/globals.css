@@ -1,7 +1,11 @@
+@import "react-toastify/dist/ReactToastify.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body, :root {
-  @apply h-full
+html,
+body,
+:root {
+  @apply h-full;
 }

@@ -10,11 +10,13 @@ import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import CustomButton from "../CustomButton";
+import useLogInModal from "@/app/hooks/useLogInModal";
+import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLogInModal();
   const [isLoading, setIsLoading] = useState(false);
 
   // default value of react hook forms
@@ -58,7 +60,7 @@ const RegisterModal = () => {
       <Heading center title="Welcome to Airbnb" subtitle="Create an account" />
 
       <Input
-        id="register_email"
+        id="email"
         label="Email"
         type="email"
         disabled={isLoading}
@@ -68,7 +70,7 @@ const RegisterModal = () => {
       />
 
       <Input
-        id="register_name"
+        id="name"
         label="Name"
         disabled={isLoading}
         register={register}
@@ -77,7 +79,7 @@ const RegisterModal = () => {
       />
 
       <Input
-        id="register_password"
+        id="password"
         label="Password"
         type="password"
         disabled={isLoading}
@@ -106,7 +108,9 @@ const RegisterModal = () => {
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => {
+          signIn("github");
+        }}
       />
 
       <div className="flex flex-row items-center gap-2 justify-center">
@@ -115,7 +119,10 @@ const RegisterModal = () => {
         </p>
         <p
           className=" text-rose-500 text-center cursor-pointer font-semibold hover:underline"
-          onClick={registerModal.onClose}
+          onClick={() => {
+            registerModal.onClose();
+            loginModal.onOpen();
+          }}
         >
           Log in
         </p>
