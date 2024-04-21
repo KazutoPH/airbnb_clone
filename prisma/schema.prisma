@@ -23,7 +23,7 @@ model User {
   hashedPassword String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  farvoriteIds String[] @db.ObjectId
+  favoriteIds String[] @db.ObjectId
 
   acount Account[]
   listings Listing[]
@@ -62,7 +62,7 @@ model Listing {
     roomCount Int
     bathroomCount Int
     guestCount Int
-    localtionValue String
+    locationValue String
     userId String @db.ObjectId
     price Int
 
