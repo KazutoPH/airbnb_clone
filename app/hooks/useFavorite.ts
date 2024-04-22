@@ -13,6 +13,8 @@ interface IUseFavorite {
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const router = useRouter();
   const loginModal = useLogInModal();
+  const isProduction =
+    process.env.NODE_ENV === "production" ? "" : "http://localhost:3000";
 
   // check if already favorited
   const hasFavorited = useMemo(() => {
@@ -37,22 +39,27 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         if (hasFavorited) {
           // remove from favorites
           request = () =>
-            axios.delete(`api/favorites/${listingId}`).then(() => {
-              toast("Removed from favorites.", {
-                type: "success",
+            axios
+              .delete(`${isProduction}/api/favorites/${listingId}`)
+              .then(() => {
+                toast("Removed from favorites.", {
+                  type: "success",
+                });
               });
-            });
         } else {
           // add to favorite
           request = () =>
-            axios.post(`api/favorites/${listingId}`).then(() => {
-              toast("Added to favorites.", {
-                type: "success",
+            axios
+              .post(`${isProduction}/api/favorites/${listingId}`)
+              .then(() => {
+                toast("Added to favorites.", {
+                  type: "success",
+                });
               });
-            });
         }
 
         await request();
+        // console.log(request);
         router.refresh();
       } catch (error) {
         toast("Something went wrong.", {

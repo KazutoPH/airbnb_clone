@@ -1,20 +1,23 @@
 import Container from "@/components/Container";
 import EmptyState from "@/components/EmptyState";
 import Image from "next/image";
-import getListings from "./libs/actions/getListings.action";
+import getListings, {
+  IListingsParams,
+} from "./libs/actions/getListings.action";
 import ListingCard from "@/components/listings/ListingCard";
 import getCurrentUser from "./libs/actions/getCurrentUser.action";
 
+interface HomeProps {
+  searchParams: IListingsParams;
+}
 
-export default async function Home() {
-  const listings = await getListings()
-  const currentUser = await getCurrentUser()
+export default async function Home({ searchParams }: HomeProps) {
+  const listings = await getListings(searchParams);
+  const currentUser = await getCurrentUser();
 
   // if empty display custom empty page
   if (listings.length === 0) {
-    return (
-      <EmptyState showReset />
-    )
+    return <EmptyState showReset />;
   }
 
   return (
@@ -27,7 +30,7 @@ export default async function Home() {
               key={listing.id}
               data={listing}
             />
-          )
+          );
         })}
       </div>
     </Container>

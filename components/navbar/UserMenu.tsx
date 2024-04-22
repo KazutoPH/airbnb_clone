@@ -9,6 +9,7 @@ import useLogInModal from "@/app/hooks/useLogInModal";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import useRentModal from "@/app/hooks/useRentModal";
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: User | null;
@@ -19,6 +20,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const registerModal = useRegisterModal();
   const logInModal = useLogInModal();
   const rentModal = useRentModal();
+  const router = useRouter();
   const toggleOpen = () => {
     setIsOpen((value) => !value);
   };
@@ -59,10 +61,30 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             {/* dropdown menu if user exist */}
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="My trips" />
-                <MenuItem onClick={() => {}} label="My favorites" />
-                <MenuItem onClick={() => {}} label="My reservation" />
-                <MenuItem onClick={() => {}} label="My properties" />
+                <MenuItem
+                  onClick={() => {
+                    router.push("/trips");
+                  }}
+                  label="My trips"
+                />
+                <MenuItem
+                  onClick={() => {
+                    router.push("/favorites");
+                  }}
+                  label="My favorites"
+                />
+                <MenuItem
+                  onClick={() => {
+                    router.push("reservations");
+                  }}
+                  label="My reservation"
+                />
+                <MenuItem
+                  onClick={() => {
+                    router.push("properties");
+                  }}
+                  label="My properties"
+                />
                 <MenuItem onClick={onRent} label="Airbnb my home" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Logout" />
