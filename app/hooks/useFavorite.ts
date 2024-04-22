@@ -39,23 +39,19 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         if (hasFavorited) {
           // remove from favorites
           request = () =>
-            axios
-              .delete(`${isProduction}/api/favorites/${listingId}`)
-              .then(() => {
-                toast("Removed from favorites.", {
-                  type: "success",
-                });
+            axios.delete(`/api/favorites/${listingId}`).then(() => {
+              toast("Removed from favorites.", {
+                type: "success",
               });
+            });
         } else {
           // add to favorite
           request = () =>
-            axios
-              .post(`${isProduction}/api/favorites/${listingId}`)
-              .then(() => {
-                toast("Added to favorites.", {
-                  type: "success",
-                });
+            axios.post(`/api/favorites/${listingId}`).then(() => {
+              toast("Added to favorites.", {
+                type: "success",
               });
+            });
         }
 
         await request();
