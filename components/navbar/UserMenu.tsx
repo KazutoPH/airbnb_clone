@@ -64,24 +64,28 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 <MenuItem
                   onClick={() => {
                     router.push("/trips");
+                    toggleOpen()
                   }}
                   label="My trips"
                 />
                 <MenuItem
                   onClick={() => {
                     router.push("/favorites");
+                    toggleOpen()
                   }}
                   label="My favorites"
                 />
                 <MenuItem
                   onClick={() => {
                     router.push("/reservations");
+                    toggleOpen()
                   }}
                   label="My reservation"
                 />
                 <MenuItem
                   onClick={() => {
                     router.push("/properties");
+                    toggleOpen()
                   }}
                   label="My properties"
                 />
