@@ -4,7 +4,7 @@ import useSearchModal from "@/app/hooks/useSearchModal";
 import Modal from "./Modal";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 import dynamic from "next/dynamic";
 import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
@@ -20,6 +20,16 @@ enum STEPS {
 }
 
 const SearchModal = () => {
+  return (
+    <>
+      <Suspense>
+        <SearchModalRender />
+      </Suspense>
+    </>
+  );
+};
+
+const SearchModalRender = () => {
   const searchModal = useSearchModal();
   const router = useRouter();
   const params = useSearchParams();
@@ -199,6 +209,6 @@ const SearchModal = () => {
       secondaryActionLabel={secondaryActionLabel}
     />
   );
-};
+}
 
 export default SearchModal;

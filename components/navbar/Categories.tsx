@@ -6,8 +6,19 @@ import { categories } from "../../constants/index";
 import { IconType } from "react-icons";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from 'next/navigation'
+import { Suspense } from "react";
 
 const Categories = () => {
+  return (
+    <>
+      <Suspense>
+        <CategoriesRender />
+      </Suspense>
+    </>
+  )
+};
+
+const CategoriesRender = () => {
   const params = useSearchParams();
   const currentCategory = params.get("category")?.toString();
   const pathname = usePathname()
@@ -32,6 +43,6 @@ const Categories = () => {
     </>
 
   );
-};
+}
 
 export default Categories;

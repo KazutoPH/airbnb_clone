@@ -12,7 +12,8 @@ const PropertiesPage = async () => {
   }
 
   // get all listings owned by current User
-  const listings = await getListings({ userId: currentUser.id });
+  const userId = currentUser.id
+  const listings = await getListings({ userId: userId });
 
   if (listings.length === 0) {
     return (
