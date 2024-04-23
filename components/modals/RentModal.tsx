@@ -27,9 +27,9 @@ enum STEPS {
 
 const RentModal = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const rentModal = useRentModal();
-  const router = useRouter()
+  const router = useRouter();
 
   // get hooks form hookform
   const {
@@ -37,43 +37,44 @@ const RentModal = () => {
     handleSubmit,
     setValue,
     watch,
-    formState: {
-      errors,
-    },
-    reset
+    formState: { errors },
+    reset,
   } = useForm<FieldValues>({
     // setting default values
     defaultValues: {
-      category: '',
+      category: "",
       location: null,
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
-      imageSrc: '',
+      imageSrc: "",
       price: 1,
-      title: '',
-      description: ''
-    }
-  })
+      title: "",
+      description: "",
+    },
+  });
 
   // check the value of the input
-  const category = watch('category')
-  const location = watch('location')
-  const guestCount = watch('guestCount')
-  const roomCount = watch('roomCount')
-  const bathroomCount = watch('bathroomCount')
-  const imageSrc = watch('imageSrc')
+  const category = watch("category");
+  const location = watch("location");
+  const guestCount = watch("guestCount");
+  const roomCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
+  const imageSrc = watch("imageSrc");
 
   // dynamically render Map Component every time the location changes
-  const Map = useMemo(() => dynamic(() => import('../Map'), { ssr: false }), [location])
+  const Map = useMemo(
+    () => dynamic(() => import("../Map"), { ssr: false }),
+    [location]
+  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
-    })
-  }
+    });
+  };
 
   // decrementation of step on backpress
   const onBack = useCallback(() => {
@@ -85,49 +86,48 @@ const RentModal = () => {
     setStep((value) => value + 1);
   }, [step]);
 
-
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     if (step !== STEPS.PRICE) {
-      return onNext()
+      return onNext();
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     // create a loading toast
-    const loadingToast = toast.loading("Creating Listing...")
+    const loadingToast = toast.loading("Creating Listing...");
 
-    axios.post('/api/listings', data)
+    axios
+      .post("/api/listings", data)
       .then(() => {
         // update loading toast when success
         router.refresh();
-        reset()
-        setStep(STEPS.CATEGORY)
-        rentModal.onClose()
+        reset();
+        setStep(STEPS.CATEGORY);
+        rentModal.onClose();
 
         toast.update(loadingToast, {
-          render: 'Listing Added Successfully',
-          type: 'success',
+          render: "Listing Added Successfully",
+          type: "success",
           isLoading: false,
-
-        })
+          autoClose: 2500,
+        });
       })
       .catch(() => {
         // update loading toast when error
         toast.update(loadingToast, {
-          render: 'Something went wrong.',
-          type: 'error',
+          render: "Something went wrong.",
+          type: "error",
           isLoading: false,
-        })
+          autoClose: 2500,
+        });
       })
-      .finally(() =>
-        setIsLoading(false)
-      )
-  }
+      .finally(() => setIsLoading(false));
+  };
 
   //use memo for the callback will return a value
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
-      return 'Create';
+      return "Create";
     }
     return "Next";
   }, [step]);
@@ -151,7 +151,7 @@ const RentModal = () => {
           <div key={item.label} className="col-span-1">
             <CategoryInput
               // get the return value of onClick prop
-              onClick={(category) => setCustomValue('category', category)}
+              onClick={(category) => setCustomValue("category", category)}
               selected={category === item.label}
               label={item.label}
               icon={item.icon}
@@ -160,7 +160,7 @@ const RentModal = () => {
         ))}
       </div>
     </div>
-  )
+  );
 
   // if in location STEP change the body content
   if (step === STEPS.LOCATION) {
@@ -172,13 +172,12 @@ const RentModal = () => {
         />
         <CountrySelect
           value={location}
-          onChange={(value) => setCustomValue('location', value)}
+          onChange={(value) => setCustomValue("location", value)}
         />
 
-        <Map
-          center={location?.latlng} />
+        <Map center={location?.latlng} />
       </div>
-    )
+    );
   }
 
   // if in location STEP change the body content
@@ -195,7 +194,7 @@ const RentModal = () => {
           title="Guest"
           subtitle="How many guest do you allow?"
           value={guestCount}
-          onChange={(value) => setCustomValue('guestCount', value)}
+          onChange={(value) => setCustomValue("guestCount", value)}
         />
 
         <hr />
@@ -203,7 +202,7 @@ const RentModal = () => {
           title="Rooms"
           subtitle="How many rooms do you have?"
           value={roomCount}
-          onChange={(value) => setCustomValue('roomCount', value)}
+          onChange={(value) => setCustomValue("roomCount", value)}
         />
 
         <hr />
@@ -211,10 +210,10 @@ const RentModal = () => {
           title="Bathrooms"
           subtitle="How many bathrooms do you have?"
           value={bathroomCount}
-          onChange={(value) => setCustomValue('bathroomCount', value)}
+          onChange={(value) => setCustomValue("bathroomCount", value)}
         />
       </div>
-    )
+    );
   }
 
   // if in location STEP change the body content
@@ -227,10 +226,10 @@ const RentModal = () => {
         />
         <ImageUpload
           value={imageSrc}
-          onChange={(value) => setCustomValue('imageSrc', value)}
+          onChange={(value) => setCustomValue("imageSrc", value)}
         />
       </div>
-    )
+    );
   }
 
   // if in description STEP change the body content
@@ -243,8 +242,8 @@ const RentModal = () => {
         />
 
         <Input
-          id='title'
-          label='Title'
+          id="title"
+          label="Title"
           disabled={isLoading}
           register={register}
           errors={errors}
@@ -252,15 +251,15 @@ const RentModal = () => {
         />
 
         <Input
-          id='description'
-          label='Description'
+          id="description"
+          label="Description"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
         />
       </div>
-    )
+    );
   }
 
   if (step === STEPS.PRICE) {
@@ -271,8 +270,8 @@ const RentModal = () => {
           subtitle="How much  do you charge per night?"
         />
         <Input
-          id='price'
-          label='Price'
+          id="price"
+          label="Price"
           formatPrice
           type="number"
           disabled={isLoading}
@@ -281,7 +280,7 @@ const RentModal = () => {
           required
         />
       </div>
-    )
+    );
   }
 
   return (

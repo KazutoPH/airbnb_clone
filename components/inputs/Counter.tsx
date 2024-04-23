@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useCallback } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -10,26 +10,20 @@ interface CounterProps {
   onChange: (value: number) => void;
 }
 const Counter = ({ title, subtitle, value, onChange }: CounterProps) => {
-
   const onAdd = useCallback(() => {
-    onChange(value + 1)
-  }, [onchange, value])
+    onChange(value + 1);
+  }, [onChange, value]);
 
   const onReduce = useCallback(() => {
-    if (value === 1)
-      return
-    onChange(value - 1)
-  }, [onchange, value])
+    if (value === 1) return;
+    onChange(value - 1);
+  }, [onChange, value]);
 
   return (
     <div className="flex flex-row items-center justify-between">
       <div className="flex flex-col">
-        <p className="font-medium">
-          {title}
-        </p>
-        <p className="font-light text-gray-600">
-          {subtitle}
-        </p>
+        <p className="font-medium">{title}</p>
+        <p className="font-light text-gray-600">{subtitle}</p>
       </div>
 
       {/* plus minus button ui and function */}
@@ -41,9 +35,7 @@ const Counter = ({ title, subtitle, value, onChange }: CounterProps) => {
           <AiOutlineMinus />
         </div>
 
-        <p className="font-light text-xl text-neutral-600">
-          {value}
-        </p>
+        <p className="font-light text-xl text-neutral-600">{value}</p>
 
         <div
           onClick={onAdd}
@@ -53,7 +45,7 @@ const Counter = ({ title, subtitle, value, onChange }: CounterProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Counter
+export default Counter;
