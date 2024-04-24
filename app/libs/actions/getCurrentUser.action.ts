@@ -14,27 +14,25 @@ export default async function getCurrentUser() {
       return null;
     }
 
-    const currentUserData = await prisma.user.findUnique({
+    const currentUser = await prisma.user.findUnique({
       where: {
         email: session.user.email as string,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        image: true,
+        createdAt: true,
+        updatedAt: true,
+        favoriteIds: true,
+      },
     });
 
-    if (!currentUserData) {
+    if (!currentUser) {
       return null;
     }
 
-    let currentUser = {};
-
-    currentUser = {
-      id: currentUserData.id,
-      name: currentUserData.name,
-      email: currentUserData.email,
-      image: currentUserData.image,
-      createdAt: currentUserData.createdAt,
-    };
-
-    console.log(currentUser);
     return currentUser;
   } catch (error: any) {
     return null;
