@@ -13,6 +13,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ListingReservation from "@/components/listings/ListingReservation";
 import { Range } from "react-date-range";
+import { SafeCurrentUser } from "@/types";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -25,7 +26,7 @@ interface ListingClientProps {
   listing: Listing & {
     user: User;
   };
-  currentUser?: User | null;
+  currentUser?: SafeCurrentUser | null;
 }
 
 const ListingClient = ({

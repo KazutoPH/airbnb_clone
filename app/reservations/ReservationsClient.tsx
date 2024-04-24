@@ -3,7 +3,7 @@
 import Container from "@/components/Container";
 import Heading from "@/components/Heading";
 import ListingCard from "@/components/listings/ListingCard";
-import { SafeReservation } from "@/types";
+import { SafeCurrentUser, SafeReservation } from "@/types";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 interface ReservationsClientProps {
   reservations: SafeReservation[];
-  currentUser?: User | null;
+  currentUser?: SafeCurrentUser | null;
 }
 
 const ReservationsClient = ({

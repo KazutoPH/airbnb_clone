@@ -10,9 +10,10 @@ import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import useRentModal from "@/app/hooks/useRentModal";
 import { useRouter } from "next/navigation";
+import { SafeCurrentUser } from "@/types";
 
 interface UserMenuProps {
-  currentUser?: User | null;
+  currentUser?: SafeCurrentUser | null;
 }
 
 const UserMenu = ({ currentUser }: UserMenuProps) => {
@@ -64,28 +65,28 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 <MenuItem
                   onClick={() => {
                     router.push("/trips");
-                    toggleOpen()
+                    toggleOpen();
                   }}
                   label="My trips"
                 />
                 <MenuItem
                   onClick={() => {
                     router.push("/favorites");
-                    toggleOpen()
+                    toggleOpen();
                   }}
                   label="My favorites"
                 />
                 <MenuItem
                   onClick={() => {
                     router.push("/reservations");
-                    toggleOpen()
+                    toggleOpen();
                   }}
                   label="My reservation"
                 />
                 <MenuItem
                   onClick={() => {
                     router.push("/properties");
-                    toggleOpen()
+                    toggleOpen();
                   }}
                   label="My properties"
                 />

@@ -4,9 +4,10 @@ import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 import Categories from "./Categories";
+import { SafeCurrentUser } from "@/types";
 
 interface NavbarProps {
-  currentUser?: User | null;
+  currentUser?: SafeCurrentUser | null;
 }
 
 const Navbar = ({ currentUser }: NavbarProps) => {

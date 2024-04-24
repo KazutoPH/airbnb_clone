@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
 import useCountries from "@/app/hooks/useCountries";
 import { User } from "@prisma/client";
 import Heading from "../Heading";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
+import { SafeCurrentUser } from "@/types";
 
 interface ListingHeadProps {
   title: string;
   locationValue: string;
   imageSrc: string;
   id: string;
-  currentUser?: User | null
+  currentUser?: SafeCurrentUser | null;
 }
-
 
 const ListingHead = ({
   title,
@@ -24,7 +24,7 @@ const ListingHead = ({
 }: ListingHeadProps) => {
   // get the country
   const { getByValue } = useCountries();
-  const location = getByValue(locationValue)
+  const location = getByValue(locationValue);
 
   return (
     <>
@@ -42,14 +42,11 @@ const ListingHead = ({
         />
 
         <div className="absolute top-5 right-5">
-          <HeartButton
-            listingId={id}
-            currentUser={currentUser}
-          />
+          <HeartButton listingId={id} currentUser={currentUser} />
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ListingHead
+export default ListingHead;

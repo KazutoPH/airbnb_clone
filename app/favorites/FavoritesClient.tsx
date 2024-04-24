@@ -1,11 +1,12 @@
 import Container from "@/components/Container";
 import Heading from "@/components/Heading";
 import ListingCard from "@/components/listings/ListingCard";
+import { SafeCurrentUser } from "@/types";
 import { Listing, User } from "@prisma/client";
 
 interface FavoriteCLientProps {
   listings: Listing[];
-  currentUser?: User | null;
+  currentUser?: SafeCurrentUser | null;
 }
 
 const FavoritesClient = ({ listings, currentUser }: FavoriteCLientProps) => {

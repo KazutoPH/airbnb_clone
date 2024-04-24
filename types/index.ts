@@ -10,3 +10,11 @@ export type SafeReservation = {
   createdAt: Date;
   listing: Listing;
 };
+
+export type SafeCurrentUser = {
+  id?: string;
+  name?: string;
+  email?: string;
+  image?: string;
+  favoriteIds?: string[];
+};

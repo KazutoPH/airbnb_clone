@@ -4,10 +4,11 @@ import React, { useCallback, useMemo } from "react";
 import { toast } from "react-toastify";
 import { User } from "@prisma/client";
 import useLogInModal from "./useLogInModal";
+import { SafeCurrentUser } from "@/types";
 
 interface IUseFavorite {
   listingId: string;
-  currentUser?: User | null;
+  currentUser?: SafeCurrentUser | null;
 }
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
