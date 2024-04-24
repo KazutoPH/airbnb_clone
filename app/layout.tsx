@@ -25,14 +25,15 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
   return (
     <html lang="en">
+      <meta
+        name="google-site-verification"
+        content="5l43uxHgZuXQaQNzQMfXZrQNVar9-WKeL80GJGXuPqQ"
+      />
       <body className={font.className}>
         <ToastContainer pauseOnHover={false} autoClose={2500} />
         <MainModalContainer />
         <Navbar currentUser={currentUser} />
-        <div className="pb-20 pt-28">
-          {children}
-        </div>
-
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );
