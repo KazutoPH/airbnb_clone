@@ -27,7 +27,7 @@ export default async function RootLayout({
     <html lang="en">
       <meta
         name="google-site-verification"
-        content="5l43uxHgZuXQaQNzQMfXZrQNVar9-WKeL80GJGXuPqQ"
+        content="s9oJup06uNe5EbnDyrx1Q41nMsOXYalZQN_y0vp_XM4"
       />
       <body className={font.className}>
         <ToastContainer pauseOnHover={false} autoClose={2500} />
