@@ -7,12 +7,31 @@ import getListings, {
 } from "./libs/actions/getListings.action";
 import ListingCard from "@/components/listings/ListingCard";
 import getCurrentUser from "./libs/actions/getCurrentUser.action";
+import { Suspense } from "react";
 
 interface HomeProps {
   searchParams: IListingsParams;
 }
 
-export default async function Home({ searchParams }: HomeProps) {
+export default function Home({ searchParams }: HomeProps) {
+  return (
+    <Suspense fallback={<Loading />}>
+      <HomeRender searchParams={searchParams} />
+    </Suspense>
+  )
+}
+
+function Loading() {
+  return (
+    <div className='h-[80vh] w-full flex items-center justify-center'>
+      <div className='loader' />
+    </div>
+  )
+}
+
+
+
+async function HomeRender({ searchParams }: HomeProps) {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
